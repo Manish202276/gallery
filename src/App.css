@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/* ................................. */
+
+.box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+
+.box2{
+  width: 25%;
+  height: 250px;
+  
+}
+
+img{
+  width: 99%;
+  height: 248px;
+
+}
