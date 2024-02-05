@@ -29,8 +29,8 @@ export default function Gallerylist()
                 }      
             </div>
             <div className='next'>
-                <button onClick={()=>seturl(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue=offvalue-20}&limit=20`)} className='previous-button'>Previous</button>
-                <button onClick={()=>seturl(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue=offvalue+20}&limit=20`)} className='next-button'>Next</button>
+                <button disabled={offvalue===0} onClick={()=>seturl(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue-20}&limit=20`)&setoffvalue(offvalue-20)} className='previous-button'>Previous</button>
+                <button  disabled={offvalue===120} onClick={()=>seturl(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue+20}&limit=20`)&setoffvalue(offvalue+20)} className='next-button'>Next</button>
             </div>
         </>
     )
