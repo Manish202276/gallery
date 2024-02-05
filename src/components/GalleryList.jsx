@@ -5,44 +5,22 @@ export default function Gallerylist()
 {   
     const [Galleryimage,setGalleryimage]=useState([]);
     const [isLoading,setisLoading]=useState(true);
-    const [offset,setoffset]=useState(0);
-
-    async function download_gallery(){
-        
-        const response=await axios.get('https://api.slingacademy.com/v1/sample-data/photos?limit=20&offset='+offset);
+    const [offvalue,setoffvalue]=useState(0);
+    const [url,seturl]=useState(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue}&limit=20`);
+        async function download_gallery(){
+        const response=await axios.get(url);
         const responsedata=response.data;
         const responsedataimg=responsedata.photos;
         const res=responsedataimg.map((galle)=>{
             return{
                 photos:galle.url
+                
             }
         })   
-
     setGalleryimage(res);
     setisLoading(false);
     }
-
-    const next=()=>{
-        if(offset>132){
-        alert("next photos...");
-        }
-        else{
-        setoffset(offset+20);
-        }
-        // console.log(offset);
-        
-    }
-    const prev=()=>{
-        if(offset<0){
-        alert("prev photos...");
-        }
-        else{
-        setoffset(offset-20);
-        }
-        // console.log(offset);
-    }
-
-    useEffect(()=>{download_gallery()})
+    useEffect(()=>{download_gallery()},[url])
     return(
         <>
             <div className="box">
@@ -50,9 +28,9 @@ export default function Gallerylist()
                 Galleryimage.map((p)=><Gallery image={p.photos} />)
                 }      
             </div>
-            <div>
-                <button onClick={prev}>Previous</button>
-                <button onClick={next}>Next</button>
+            <div className='next'>
+                <button disabled={offvalue===0} onClick={()=>seturl(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue-20}&limit=20`)&setoffvalue(offvalue-20)} className='previous-button'>Previous</button>
+                <button  disabled={offvalue===120} onClick={()=>seturl(`https://api.slingacademy.com/v1/sample-data/photos?offset=${offvalue+20}&limit=20`)&setoffvalue(offvalue+20)} className='next-button'>Next</button>
             </div>
         </>
     )
