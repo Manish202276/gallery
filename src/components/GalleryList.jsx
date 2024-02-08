@@ -13,19 +13,23 @@ export default function Gallerylist()
         const responsedataimg=responsedata.photos;
         const res=responsedataimg.map((galle)=>{
             return{
-                photos:galle.url
+                photos:galle.url,
+                title:galle.title
                 
             }
         })   
     setGalleryimage(res);
     setisLoading(false);
+
+    console.log(res[0].photos,res[0].title);
+
     }
     useEffect(()=>{download_gallery()},[url])
     return(
         <>
             <div className="box">
                 {(isLoading)?'Loading....':
-                Galleryimage.map((p)=><Gallery image={p.photos} />)
+                Galleryimage.map((p)=><Gallery image={p.photos} title={p.title} />)
                 }      
             </div>
             <div className='next'>
